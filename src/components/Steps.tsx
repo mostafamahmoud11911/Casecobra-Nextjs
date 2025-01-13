@@ -49,8 +49,8 @@ export default function Steps() {
                                 <span className='ml-4 h-full mt-0.5 flex min-w-0 flex-col justify-center'>
                                     <span
                                         className={cn('text-sm font-semibold text-zinc-700', {
-                                            'text-primary': isCompleted,
-                                            'text-zinc-700': isCurrent,
+                                            'text-zinc-700': isCompleted,
+                                            'text-primary': isCurrent,
                                         })}>
                                         {step.name}
                                     </span>
