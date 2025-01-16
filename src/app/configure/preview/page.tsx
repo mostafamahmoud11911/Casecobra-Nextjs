@@ -4,13 +4,13 @@ import { db } from '../../../../db';
 import DesignPreview from './DesignPreview';
 
 interface SearchParamsProps {
-    searchParams: {
+    searchParams: Promise<{
         [key: string]: string | string[] | undefined
-    }
+    }>
 }
 
 export default async function Preview({ searchParams }: SearchParamsProps) {
-    const { id } = searchParams;
+    const { id } = await searchParams;
 
 
     if (!id || typeof id !== "string") {
@@ -29,6 +29,6 @@ export default async function Preview({ searchParams }: SearchParamsProps) {
 
 
     return (
-        <DesignPreview configuration={configuration}/>
+        <DesignPreview configuration={configuration} />
     )
 }

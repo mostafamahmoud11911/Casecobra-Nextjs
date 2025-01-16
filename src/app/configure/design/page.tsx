@@ -4,15 +4,16 @@ import DesignConfigurator from "./DesignConfigurator"
 
 
 
-type SearchParamsProps = {
-  searchParams: {
+
+interface searchParams {
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined
-  }
+  }>
 }
 
-export default async function Design({ searchParams }: SearchParamsProps) {
+export default async function Design({ searchParams }: searchParams) {
 
-  const { id } = searchParams
+  const { id } = await searchParams
 
   if (!id || typeof id !== "string") {
     return notFound()
@@ -33,5 +34,5 @@ export default async function Design({ searchParams }: SearchParamsProps) {
 
 
   const { imageUrl, width, height } = configuration;
-  return <DesignConfigurator configId={configuration.id} imageDimensions={{ width, height }} imageUrl={imageUrl}  />
+  return <DesignConfigurator configId={configuration.id} imageDimensions={{ width, height }} imageUrl={imageUrl} />
 }
