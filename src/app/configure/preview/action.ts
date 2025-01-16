@@ -72,7 +72,7 @@ export const createCheckoutSession = async ({
     payment_method_types: ["card"],
     mode: "payment",
     shipping_address_collection: {
-      allowed_countries: ["UA", "AD", "US", "DE", "EG", "ID"],
+      allowed_countries: ["UA", "AD", "US", "DE", "EG", "ID", "AE"],
     },
     metadata: {
       userId: user.id,
