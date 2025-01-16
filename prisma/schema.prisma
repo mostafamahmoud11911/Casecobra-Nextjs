@@ -47,7 +47,7 @@ enum CaseColor {
 }
 
 model Configuration {
-  id              String       @id @default(cuid())
+  id              String        @id @default(cuid())
   width           Int
   height          Int
   imageUrl        String
@@ -56,4 +56,52 @@ model Configuration {
   color           CaseColor?
   finish          CaseFinish?
   croppedImageUrl String?
+  Order           Order[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String
+  order     Order[]
+  createdAt DateTime @default(now())
+  updatedAT DateTime @updatedAt
+}
+
+model Order {
+  id                String          @id @default(cuid())
+  configurationId   String
+  configuration     Configuration   @relation(fields: [configurationId], references: [id])
+  userId            String
+  user              User            @relation(fields: [userId], references: [id])
+  amount            Float
+  isPaid            Boolean         @default(false)
+  status            OrderStatus     @default(awaiting_shipment)
+  shippingAddressId String?
+  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
+  billingAddress    BillingAddress? @relation(fields: [billingAddressId], references: [id])
+  billingAddressId  String?
+}
+
+model ShippingAddress {
+  id          String  @id @default(cuid())
+  name        String
+  street      String
+  city        String
+  postalCode  String
+  country     String
+  state       String?
+  phoneNumber String?
+  orders      Order[]
+}
+
+model BillingAddress {
+  id          String  @id @default(cuid())
+  name        String
+  street      String
+  city        String
+  postalCode  String
+  country     String
+  state       String?
+  phoneNumber String?
+  orders      Order[]
 }

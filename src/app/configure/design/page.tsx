@@ -23,7 +23,8 @@ export default async function Design({ searchParams }: SearchParamsProps) {
     where: {
       id
     }
-  })
+  });
+
 
   if (!configuration) {
     return notFound();
