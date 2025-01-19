@@ -1,6 +1,6 @@
 "use server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { db } from "../../../../db";
+import { db } from "../../../db";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { Order } from "@prisma/client";
 import { stripe } from "@/lib/stripe";

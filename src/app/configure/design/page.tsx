@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { db } from "../../../../db"
+import { db } from "../../../db"
 import DesignConfigurator from "./DesignConfigurator"
 
 

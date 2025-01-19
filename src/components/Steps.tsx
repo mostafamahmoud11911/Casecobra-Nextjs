@@ -24,6 +24,7 @@ const STEPS = [
 export default function Steps() {
 
     const pathname = usePathname();
+    console.log(pathname.split("/")[2]);
 
     return (
         <ol className='rounded-md lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200'>
@@ -32,7 +33,7 @@ export default function Steps() {
 
 
                 const isCurrent = pathname.endsWith(step.url);
-                const isCompleted = STEPS.slice(i + 1).some(step => step.url === pathname);
+                const isCompleted = STEPS.slice(i + 1).some(step => step.url === `/${pathname.split("/")[2]}`);
 
                 const imagePath = `/images/snake-${i + 1}.png`;
                 
@@ -40,7 +41,7 @@ export default function Steps() {
                 return (
                     <li key={step.name} className='relative flex-1 my-2 overflow-hidden'>
                         <div>
-                            <span className={cn("absolute bg-zinc-400 w-1 h-full left-0 top-0 lg:top-auto lg:bottom-0  lg:h-1 lg:w-full", { "bg-zinc-700": isCurrent, "bg-primary": isCompleted })} />
+                            <span className={cn("absolute bg-zinc-400 w-1 h-full left-0 top-0 lg:top-auto lg:bottom-0  lg:h-1 lg:w-full", { "bg-zinc-400": isCompleted, "bg-primary": isCurrent })} />
                             <span className={cn(i !== 0 ? 'lg:pl-7' : "", "flex items-center px-10 py-4 text-sm font-medium")}>
                                 <span className='flex-shrink-0'>
                                     <img src={imagePath} className={cn('flex h-20 w-20 object-contain items-center justify-center', { 'boreder-none': isCompleted, 'border-zinc-700': isCurrent })} alt="" />

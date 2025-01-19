@@ -15,7 +15,7 @@ export default function AuthCallback() {
     if (configurationId) {
       setConfigId(configurationId)
     }
-  }, [])
+  }, [router])
 
   const { data } = useQuery({
     queryKey: ['auth-callback'],

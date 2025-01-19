@@ -49,7 +49,7 @@ export default function DesignConfigurator({ configId, imageDimensions, imageUrl
 
   const { startUpload } = useUploadThing('imageUploader');
 
-  const { mutate: saveConfig } = useMutation({
+  const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ["saveConfig"],
     mutationFn: async (arg: SaveConfigTypes) => {
       await Promise.all([saveConfiguration(), _saveConfig(arg)])
@@ -157,7 +157,7 @@ export default function DesignConfigurator({ configId, imageDimensions, imageUrl
           }}
         >
           <div className='relative w-full h-full'>
-            <NextImage src={imageUrl} className='pointer-events-none' fill alt='' />
+            <NextImage src={imageUrl} className='pointer-events-none object-cover' fill alt='' />
           </div>
         </Rnd>
       </div>
@@ -258,7 +258,7 @@ export default function DesignConfigurator({ configId, imageDimensions, imageUrl
               <p className='font-medium whitespace-nowrap'>
                 {formatPrice((BASE_PRICE + options.finishes.price + options.materials.price) / 100)}
               </p>
-              <Button onClick={() => saveConfig({configId, color: options.color.value, model: options.model.value, material: options.materials.value, finish: options.finishes.value})} className='w-full' size="sm">Continue <ArrowRight className='w-4 h-4 ml-1.5 inline-block' /></Button>
+              <Button isLoading={isPending} disabled={isPending} textLoading='Saving...' onClick={() => saveConfig({configId, color: options.color.value, model: options.model.value, material: options.materials.value, finish: options.finishes.value})} className='w-full' size="sm">Continue <ArrowRight className='w-4 h-4 ml-1.5 inline-block' /></Button>
             </div>
           </div>
         </div>
