@@ -3,7 +3,11 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
+import {
+    RegisterLink,
+    LoginLink,
+    LogoutLink
+  } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default async function Navbar() {
     const {getUser} = await getKindeServerSession();
@@ -24,14 +28,14 @@ export default async function Navbar() {
                     <div className="h-full space-x-4 flex items-center">
                         {user ? (
                             <>
-                                <Link href="/api/auth/logout" className={buttonVariants({ size: "sm", variant: "ghost" })}>Sign out</Link>
+                                <LogoutLink className={buttonVariants({ size: "sm", variant: "ghost" })}>Sign out</LogoutLink>
                                 {isAdmin ? <Link href="/dashboard" className={buttonVariants({ size: "sm", variant: "ghost" })}>Dashboard</Link> : <></>}
                                 <Link href="/configure/upload" className={buttonVariants({ size: "sm", className: "hidden sm:flex items-center gap-1" })}>Create case <ArrowRight className="w-5 h-5 ml-1.5" /></Link>
                             </>
                         ) : (
                             <>
-                                <Link href="/api/auth/register" className={buttonVariants({ size: "sm", variant: "ghost" })}>Sign up</Link>
-                                <Link href="/api/auth/login" className={buttonVariants({ size: "sm" })}>Sign in</Link>
+                                <RegisterLink className={buttonVariants({ size: "sm", variant: "ghost" })}>Sign up</RegisterLink>
+                                <LoginLink href="/api/auth/login" className={buttonVariants({ size: "sm" })}>Sign in</LoginLink>
                                 <div className="h-8 w-px bg-zinc-200 hidden sm:block " />
                                 <Link href="/configure/upload" className={buttonVariants({ size: "sm", className: "hidden sm:flex items-center gap-1" })}>Create case <ArrowRight className="w-5 h-5 ml-1.5" /></Link>
                             </>
