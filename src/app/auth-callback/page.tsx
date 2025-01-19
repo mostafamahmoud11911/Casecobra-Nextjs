@@ -27,7 +27,6 @@ export default function AuthCallback() {
   if (data?.success) {
     if (configId) {
       localStorage.removeItem('configurationId');
-      setConfigId(null);
       redirect(`/configure/preview?id=${configId}`);
     } else {
       redirect('/')
