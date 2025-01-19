@@ -64,8 +64,7 @@ export default async function Dashboard() {
     })
 
 
-    console.log(orders, "orders");
-    console.log(((lastWeekSum._sum.amount ?? 0) * 100), "last week sum");
+
 
     const WEEKLY_GOAL = 500
     const MONTHLY_GOAL = 2500

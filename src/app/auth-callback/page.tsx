@@ -3,19 +3,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { getAuthStatus } from "./action";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 export default function AuthCallback() {
   const [configId, setConfigId] = useState<string | null>(null)
-  const router = useRouter()
+
 
   useEffect(() => {
     const configurationId = localStorage.getItem('configurationId')
     if (configurationId) {
       setConfigId(configurationId)
     }
-  }, [router])
+  }, [])
 
   const { data } = useQuery({
     queryKey: ['auth-callback'],
@@ -26,10 +26,11 @@ export default function AuthCallback() {
 
   if (data?.success) {
     if (configId) {
-      localStorage.removeItem('configurationId')
-      router.push(`/configure/preview?id=${configId}`)
+      localStorage.removeItem('configurationId');
+      setConfigId(null);
+      redirect(`/configure/preview?id=${configId}`);
     } else {
-      router.push('/')
+      redirect('/')
     }
   }
 
