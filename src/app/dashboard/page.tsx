@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { db } from "@/db";
 import { formatPrice } from "@/lib/utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import StatusDropdown from "./StatusDropdown";
 
 
@@ -16,7 +16,8 @@ export default async function Dashboard() {
 
 
     if (!user || user.email !== ADMIN_EMAIL) {
-        redirect("/")
+        // fix this
+        return notFound();
     }
 
 
