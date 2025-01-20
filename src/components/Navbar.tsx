@@ -7,7 +7,7 @@ import {
     RegisterLink,
     LoginLink,
     LogoutLink
-  } from "@kinde-oss/kinde-auth-nextjs/components";
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default async function Navbar() {
     const {getUser} = await getKindeServerSession();
